@@ -77,7 +77,15 @@ FROM public.spotify
 WHERE feature_streams > solo_streams
 ORDER BY feature_advantage DESC;
 
-
+--SHOWING ONLY GENRES WITH AT LEAST 5 ARTISTS IN THE TABLE
+SELECT
+    genre,
+    COUNT(artist) AS artist_count,
+    SUM(total_streams) AS total_genre_streams
+FROM spotify
+GROUP BY genre
+HAVING COUNT(artist) >= 5
+ORDER BY total_genre_streams DESC;
 
 --GENRES WITH A LOW NUMBER OF ARTISTS BUT HIGH AVERAGE TOTAL STREAMS
 SELECT
